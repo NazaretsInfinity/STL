@@ -2,6 +2,10 @@
 #include<array>
 #include<vector>
 #include<list>
+#include<forward_list>
+
+
+
 using std::cin;
 using std::cout;
 using std::endl;
@@ -28,6 +32,31 @@ void main()
 	cout << "Enter the index where to delete: "; cin >> index;
 	vec.erase(vec.begin() + index);
 	vector_properties(vec);
+
+#endif 
+#ifdef checking
+	std::list<int> mylist = { 3,5,8,13,21 };
+	for (int i : mylist)cout << i << tab; cout << endl;
+
+	int value, index;
+	std::list<int>::iterator it = mylist.begin();
+
+	cout << "Enter the index of new element: "; cin >> index;
+	cout << "Enter the value to add: "; cin >> value;
+	/*while (index)
+	{
+		++it; --index;
+	}*/
+	std::advance(it, index);
+	mylist.insert(it, value); it = mylist.begin();
+	for (int i : mylist)cout << i << tab; cout << endl;
+
+	cout << "Enter the index where to delete: "; cin >> index;
+    std::advance(it, index);
+	mylist.erase(it);
+	for (int i : mylist)cout << i << tab; cout << endl;
+#endif 
+
 }
 
 
