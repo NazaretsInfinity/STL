@@ -49,7 +49,7 @@ void main()
 		cout << endl;*/
 		for (std::string i : it->second)
 		{
-			cout << *(it->second.data()) << (i == *(it->second.data()) ? ", " : ";");
+			cout << *(it->second.data()) << (i != it->second.back() ? ", " : ";");
 		}
 		cout << endl;
 	}
