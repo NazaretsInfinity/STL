@@ -10,6 +10,8 @@ using std::endl;
 #define delimeter "\n============================\n"
 #define checking
 
+
+
 void main()
 {
 	setlocale(LC_ALL, "Russian");
