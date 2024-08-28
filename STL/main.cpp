@@ -31,7 +31,7 @@ void main()
 	vector_properties(vec);
 
 #endif 
-#ifdef checking
+#ifdef checking2
 	std::list<int> mylist = { 3,5,8,13,21 };
 	for (int i : mylist)cout << i << tab; cout << endl;
 
