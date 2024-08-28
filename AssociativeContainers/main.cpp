@@ -38,7 +38,7 @@ void main()
 	};
 	for (std::map<std::string, std::vector<std::string>>::iterator it = dictionary.begin(); it != dictionary.end(); ++it)
 	{
-		cout.width(16);
+		cout.width(12);
 		cout << std::left;
 		cout << (*it).first << ":\t";
 		/*for (std::vector<std::string>::iterator jt = it->second.begin(); jt != it->second.end(); ++jt)
@@ -49,10 +49,7 @@ void main()
 		cout << endl;*/
 		for (std::string i : it->second)
 		{
-			int j = 0;
-			cout << it->second[j];
-			cout << (it->second[j] != it->second.back() ? ", " : ";");
-			++j;
+			cout << *(it->second.data()) << (i == *(it->second.data()) ? ", " : ";");
 		}
 		cout << endl;
 	}
