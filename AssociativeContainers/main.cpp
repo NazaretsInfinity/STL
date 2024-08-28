@@ -1,6 +1,7 @@
 ﻿#include<iostream>
 #include<string>
 #include<map>
+#include<fstream>
 #include<vector>
 using std::cin;
 using std::cout;
@@ -14,7 +15,6 @@ class PoliceTraffic
 {
 	std::map<std::string, std::vector<std::string>> given;
 public: 
-	PoliceTraffic(std::map<std::string, std::vector<std::string>> given):given(given){}
 	PoliceTraffic(std::initializer_list<std::pair<std::string, std::vector<std::string>>> il)
 	{
 		for (auto init : il)
@@ -22,7 +22,6 @@ public:
 			given.insert(given.end(), init);
 		}
 	}
-
 	void add(std::string number, std::initializer_list<std::string> breaches)
 	{
 		if (given.find(number) == given.end())
@@ -36,16 +35,28 @@ public:
 	}
 	void print()
 	{
-		for (std::map<std::string, std::vector<std::string>>::iterator it = given.begin(); it != given.end(); ++it)
+		for(std::map<std::string, std::vector<std::string>>::iterator it = given.begin(); it != given.end(); ++it)
 		{
 			cout << (*it).first << ":\t";
 			for (std::string i : it->second)cout << i << (i != it->second.back() ? ", " : ";");
 			cout << endl;
 		}
 	}
+	void print(const std::string filename)
+	{
+		std::ofstream fout(filename);
+		for (std::map<std::string, std::vector<std::string>>::iterator it = given.begin(); it != given.end(); ++it)
+		{
+			fout << (*it).first << ":\t";
+			for (std::string i : it->second)fout << i << (i != it->second.back() ? ", " : ";");
+			fout << endl;
+		}
+		fout.close();
+		std::string out = "notepad " + filename;
+		system(out.c_str());
+	}
 };
 
-void add(std::map<std::string, std::vector<std::string>>& given, std::string number, std::initializer_list<std::string> breaches);
 void main()
 {
 	setlocale(LC_ALL, "Russian");
@@ -92,48 +103,5 @@ void main()
 		cout << endl;
 	}
 #endif
-#ifdef checking2
-
-	std::map<std::string, std::vector<std::string>> TrafficPolice =
-	{
-		{"0345el", {"chirped too loud", "ate kids" , "a dog"}}
-	};
-	add(TrafficPolice, "0345el", { "being silly" });
-	add(TrafficPolice, "t266uh", { "no paying attention on the road" });
-
-	for (std::map<std::string, std::vector<std::string>>::iterator it = TrafficPolice.begin(); it != TrafficPolice.end(); ++it)
-	{
-		cout << (*it).first << ":\t";
-		for (std::string i : it->second)cout << i << (i != it->second.back() ? ", " : ";");
-		cout << endl;
-	}
-#endif 
-	/*std::map<std::string, std::vector<std::string>> listok =
-	{
-		{"0345el", {"chirped too loud", "ate kids" , "a dog"}}
-	};
-
-	PoliceTraffic opt(listok);*/
-
-	PoliceTraffic opt =
-	{
-		{"0345el", {"chirped too loud", "ate kids" , "a dog"}}
-	};
-
-	opt.add("t266uh", { "no paying attention on the road" });
-
-	opt.print();
 }
 
-
-void add(std::map<std::string,std::vector<std::string>>& given, std::string number, std::initializer_list<std::string> breaches)
-{
-	if (given.find(number) == given.end())
-	{
-		given.insert(std::pair<std::string, std::vector<std::string>>(number, breaches));
-	}
-	else
-	{
-		given.find(number)->second.insert(given.find(number)->second.end(), breaches);
-	}
-}
